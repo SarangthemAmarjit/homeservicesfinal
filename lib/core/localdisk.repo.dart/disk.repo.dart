@@ -31,6 +31,16 @@ class DiskRepo {
     prefs.setInt('statuscode', getcode);
   }
 
+  save3({required int getcode}) async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.setInt('statuscode3', getcode);
+  }
+
+  save4({required int getcode}) async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.setInt('statuscode4', getcode);
+  }
+
   retrieve1() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -45,10 +55,31 @@ class DiskRepo {
     return retrivestatuscode;
   }
 
+  retrieve31<int>() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    retriveid = prefs.getInt('id');
+    return retriveid;
+  }
+
   retrieve3() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     retrivemail = prefs.getString('email').toString();
     return retrivemail;
+  }
+
+  retrieve4<int>() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    retrivestatuscode2 = prefs.getInt('statuscode3');
+    return retrivestatuscode2;
+  }
+
+  retrieve5<int>() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    retrivestatuscode2 = prefs.getInt('statuscode4');
+    return retrivestatuscode2;
   }
 }

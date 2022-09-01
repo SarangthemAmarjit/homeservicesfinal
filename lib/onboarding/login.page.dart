@@ -1,16 +1,13 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:homeservice/core/localdisk.repo.dart/disk.repo.dart';
 import 'package:homeservice/logic/counter/counter_cubit.dart';
-import 'package:homeservice/onboarding/register.dart';
-import 'package:homeservice/pages/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homeservice/router/router.gr.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '';
+import 'package:homeservice/Refactor/constant.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -26,10 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formkey = GlobalKey<FormState>();
 
-  void clear() {
-    _emaillogin.clear();
-    _passwordlogin.clear();
-  }
+  bool isloading = false;
 
   @override
   void initState() {
@@ -37,28 +31,28 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onLoading() async {
+    setState(() {
+      isloading = true;
+    });
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Container(
-            alignment: Alignment.topCenter,
-            margin: const EdgeInsets.all(8),
-            child: const LinearProgressIndicator(
-              backgroundColor: Colors.orangeAccent,
-              valueColor: AlwaysStoppedAnimation(Colors.blue),
-            ));
+        return alertbox;
       },
     );
     await context
         .read<CounterCubit>()
         .LoginData(_emaillogin.text, _passwordlogin.text);
-    getdata();
-    Future.delayed(const Duration(seconds: 5));
-    Navigator.pop(context);
+    getdata().whenComplete(() {
+      Navigator.pop(context);
+      setState(() {
+        isloading = false;
+      });
+    });
   }
 
-  getdata() async {
+  Future getdata() async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {

@@ -7,6 +7,7 @@ import 'package:homeservice/pages/home.dart';
 import 'package:homeservice/pages/nointerpage.dart';
 import 'package:homeservice/pages/profile.page.dart';
 import 'package:homeservice/pages/splash_screen.dart';
+import 'package:homeservice/pages/userprofile.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -19,6 +20,7 @@ import 'package:homeservice/pages/splash_screen.dart';
     AutoRoute(page: ProfilePage),
     AutoRoute(page: RegisterPage),
     AutoRoute(page: AllservicePage),
+    AutoRoute(page: UserProfilePage),
   ],
 )
 class $AppRouter {}

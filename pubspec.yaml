@@ -47,6 +47,10 @@ dependencies:
   google_fonts: ^3.0.1
   marquee: ^2.2.3
   flutter_native_splash: ^2.2.7
+  datetime_picker_formfield: ^2.0.1
+  flutter_progress_hud: ^2.0.2
+  future_progress_dialog: ^0.2.0
+  flutter_easyloading: ^3.0.5
   
 
 flutter_icons:

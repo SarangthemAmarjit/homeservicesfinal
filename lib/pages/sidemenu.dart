@@ -63,7 +63,9 @@ class _NavDrawerState extends State<NavDrawer> {
           ListTile(
               leading: const Icon(Icons.verified_user),
               title: const Text('Profile'),
-              onTap: () {}),
+              onTap: () {
+                context.router.push(UserProfileRoute());
+              }),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Feedback'),

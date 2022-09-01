@@ -2,8 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homeservice/model/getmodal.dart';
 import 'package:homeservice/model/jwt_model.dart';
 import 'package:homeservice/model/model.dart';
+import 'package:homeservice/model/postmodel.dart';
 import '../../core/localdisk.repo.dart/disk.repo.dart';
 import '../../repository/resgitration.repo.dart';
 
@@ -45,7 +47,7 @@ class CounterCubit extends Cubit<CounterState> {
     }
   }
 
-  LoginData(
+  Future LoginData(
     String email,
     String password,
   ) async {
@@ -60,6 +62,44 @@ class CounterCubit extends Cubit<CounterState> {
           finalkey2: getkey2,
           getuser: getuserfinal,
           getstatuscode: 0));
+    }
+  }
+
+  updateprofile(
+      {required int id,
+      required String number,
+      required String address,
+      required String postoffice,
+      required String dateofbirth,
+      required String district,
+      required String policestation,
+      required String pincode}) async {
+    Postmodel? logmodel = await repo.creatprofile(
+        id: id,
+        number: number,
+        address: address,
+        postoffice: postoffice,
+        dateofbirth: dateofbirth,
+        district: district,
+        policestation: policestation,
+        pincode: pincode);
+    if (logmodel == null) {
+      int status = await diskrepo.retrieve4();
+    } else {
+      emit(CounterState(
+          finalkey1: getkey1,
+          finalkey2: getkey2,
+          getuser: getuserfinal,
+          getstatuscode: 0));
+    }
+  }
+
+  getProfile() async {
+    GetProfiledata? getmodel = await repo.Getprofile();
+    if (getmodel == null) {
+      int status = await diskrepo.retrieve5();
+    } else {
+      return getmodel;
     }
   }
 

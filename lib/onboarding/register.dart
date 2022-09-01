@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homeservice/Refactor/constant.dart';
 import 'package:homeservice/logic/counter/counter_cubit.dart';
 import 'package:homeservice/router/router.gr.dart';
 
@@ -25,13 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Container(
-            alignment: Alignment.topCenter,
-            margin: const EdgeInsets.all(8),
-            child: const LinearProgressIndicator(
-              backgroundColor: Colors.orangeAccent,
-              valueColor: AlwaysStoppedAnimation(Colors.blue),
-            ));
+        return alertbox;
       },
     );
     await context.read<CounterCubit>().submitData(_usernameController.text,
@@ -98,6 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
               child: TextFormField(
+                obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(labelText: "Create Password"),
               ),
